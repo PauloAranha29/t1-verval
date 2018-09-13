@@ -2,7 +2,7 @@
 //package VerValT1;
 
 public class ScoresBuggedImpl implements Scores {
-	public static final int maxEntries = 10; // number of high scores we keep
+	public static final int maxEntries = 5; // number of high scores we keep
 
 	protected int numEntries; // number of actual entries
 
@@ -48,12 +48,12 @@ public class ScoresBuggedImpl implements Scores {
 	public GameEntry remove(int i) throws IndexOutOfBoundsException {
 		if ((i < 0) || (i > numEntries))
 			throw new IndexOutOfBoundsException("Invalid index: " + i);
-		GameEntry temp = entries[i]; // temporarily save the object to be
-										// removed
+		
+		GameEntry temp = entries[i]; // temporarily save the object to be removed
 		for (int j = i; j < numEntries - 1; j++)
 			// count up from i (not down)
 			entries[j] = entries[j + 1]; // move one cell to the left
-		entries[numEntries - 1] = null; // null out the old last score
+		entries[numEntries - 1] = null;// null out the old last score
 		numEntries--;
 		return temp; // return the removed object
 	}
