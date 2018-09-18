@@ -14,7 +14,7 @@ public class teste {
 		for(int i=0; i<5; i++) {
 			scores.entries[i] = null;
 		}
-		//assertEquals("Deve ter 0 elementos: ", 0, scores.getNumElements());
+		assertEquals("Deve ter 0 elementos: ", 0, scores.getNumElements());
 	}
 	
 	@Test
@@ -28,16 +28,20 @@ public class teste {
 		
 		GameEntry joao = new GameEntry("Joao", 7);
 		assertEquals("Deve inserir na lista: ", true, scores.add(joao));
+		
 		GameEntry laura = new GameEntry("Laura", 13);
 		assertEquals("Deve inserir na lista: ", true, scores.add(laura));
+		
 		GameEntry carlos = new GameEntry("Carlos", 11);
 		assertEquals("Deve inserir na lista: ", true, scores.add(carlos));
+		
 		GameEntry luiza = new GameEntry("Luiza", 11);
 		assertEquals("Deve inserir na lista: ", true, scores.add(luiza));
 		
 		assertEquals("Deve ter 5 elementos (lista cheia): ", 5, scores.getNumElements());
 		
 		assertEquals("Não deve inserir na lista: ", false, scores.add(new GameEntry("Gabriel", 2)));
+		
 		assertEquals("Deve ter 5 elementos (lista cheia): ", 5, scores.getNumElements());
 		
 		assertEquals("Deve inserir na lista: ", true, scores.add(new GameEntry("Carol", 55)));
@@ -53,23 +57,20 @@ public class teste {
 	@Test
 	public void testeRemove() {
 		
-		GameEntry aux = new GameEntry("John", 10);
-		assertEquals("Deve ter 0 elementos: ", 0, scores.getNumElements());
-		
-		assertEquals("Deve inserir na lista: ", true, scores.add(aux));
-		assertEquals("Deve inserir na lista: ", aux, scores.remove(0));
-		assertEquals("Deve ter 0 elementos: ", 0, scores.getNumElements());
+		GameEntry fernando = new GameEntry("Fernando", 10);	
+		scores.add(fernando);
+		assertEquals("Deve apagar da lista: ", fernando, scores.remove(0));
 		
 		GameEntry luiza = new GameEntry("Luiza", 10);
-		assertEquals("Deve inserir na lista: ", true, scores.add(luiza));
+		scores.add(luiza);
 		GameEntry joao = new GameEntry("Joao", 7);
-		assertEquals("Deve inserir na lista: ", true, scores.add(joao));
+		scores.add(joao);
 		GameEntry laura = new GameEntry("Laura", 13);
-		assertEquals("Deve inserir na lista: ", true, scores.add(laura));
+		scores.add(laura);
 		GameEntry carlos = new GameEntry("Carlos", 11);
-		assertEquals("Deve inserir na lista: ", true, scores.add(carlos));
+		scores.add(carlos);
 		GameEntry john = new GameEntry("John", 12);
-		assertEquals("Deve inserir na lista: ", true, scores.add(john));
+		scores.add(john);
 		
 		assertEquals("Deve remover john da lista: ", john, scores.remove(1));
 		assertEquals("Deve ter 0 elementos: ", 4, scores.getNumElements());
@@ -87,9 +88,38 @@ public class teste {
 		scores.remove(5);
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IndexOutOfBoundsException.class)
 	public final void testeRemove4(){
-		scores.remove(1);
+		scores.remove(4);
+	}
+	
+	@Test
+	public void testeNumElementos() {
+		assertEquals("Deve ter 0 elementos: ", 0, scores.getNumElements());
+		
+		GameEntry john = new GameEntry("John", 10);
+		scores.add(john);
+		assertEquals("Deve ter 0 elementos: ", 1, scores.getNumElements());
+
+		GameEntry carol = new GameEntry("Carol", 5);
+		scores.add(carol);
+		GameEntry dan = new GameEntry("Dan", 3);
+		scores.add(dan);
+		assertEquals("Deve ter 0 elementos: ", 3, scores.getNumElements());
+		
+		GameEntry paulo = new GameEntry("Paulo", 1);
+		scores.add(paulo);
+		GameEntry gesiel = new GameEntry("Gesiel", 15);
+		scores.add(gesiel);
+		GameEntry gabriel = new GameEntry("Gabriel", 1);
+		scores.add(gabriel);
+		assertEquals("Deve ter 0 elementos: ", 5, scores.getNumElements());
+
+	}
+	
+	@Test
+	public void testeCapacidade() {
+		assertEquals("Deve retornar 5:", 5, scores.getCapacity());
 	}
 	
 	@Test
